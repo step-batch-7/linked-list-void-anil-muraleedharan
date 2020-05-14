@@ -55,16 +55,21 @@ Status add_to_start(List_ptr list, Element element)
   return Success;
 }
 
+Status isPositionValid(int position, int list_length)
+{
+  return position > list_length || position < 0;
+}
+
 Status insert_at(List_ptr list, Element element, int position)
 {
-  Node_ptr new_node = create_node(element);
-  if(position > list->length || position < 0 || new_node == NULL)
-  {
-    return Failure;
-  }
   if(position == 0 || position == list->length)
   {
     return position == 0 ? add_to_start(list, element) : add_to_list(list, element);
+  }
+  Node_ptr new_node = create_node(element);
+  if(isPositionValid(position, list->length) || new_node == NULL)
+  {
+    return Failure;
   }
   int pos = 0;
   Node_pair_ptr node_pair = malloc(sizeof(Node_pair));
