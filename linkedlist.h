@@ -26,6 +26,13 @@ typedef struct node
 
 typedef Node *Node_ptr;
 
+typedef struct {
+  Node_ptr prev;
+  Node_ptr current;
+} Node_pair;
+
+typedef Node_pair *Node_pair_ptr;
+
 typedef struct linklist
 {
   Node *first;
