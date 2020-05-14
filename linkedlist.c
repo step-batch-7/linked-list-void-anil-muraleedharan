@@ -55,7 +55,7 @@ Status add_to_start(List_ptr list, Element element)
   return Success;
 }
 
-Status isPositionValid(int position, int list_length)
+Status is_position_invalid_to_add(int position, int list_length)
 {
   return position > list_length || position < 0;
 }
@@ -67,7 +67,7 @@ Status insert_at(List_ptr list, Element element, int position)
     return position == 0 ? add_to_start(list, element) : add_to_list(list, element);
   }
   Node_ptr new_node = create_node(element);
-  if(isPositionValid(position, list->length) || new_node == NULL)
+  if(is_position_invalid_to_add(position, list->length) || new_node == NULL)
   {
     return Failure;
   }
@@ -143,6 +143,35 @@ Element remove_from_end(List_ptr list)
   list->last = node_pair->prev;
   Element element = node_pair->current->element;
   free(node_pair);
+  list->length--;
+  return element;
+}
+
+Status is_position_invalid_to_remove(int position, int list_length)
+{
+  return list_length == 0 || position > list_length - 1;
+}
+
+Status remove_at(List_ptr list, int position)
+{
+  if(is_position_invalid_to_remove(position,list->last) || position < 0)
+  {
+    return NULL;
+  }
+  if(position == list->length - 1 || position == 0)
+  {
+    return position == 0 ? remove_from_start(list) : remove_from_end(list);
+  }
+  int length = 0;
+  Node_ptr p_walk = list->first;
+  while (length < position - 1)
+  {
+    p_walk = p_walk->next;
+    length++;
+  }
+  Node_ptr temp = p_walk->next;
+  Element element = temp->element;
+  p_walk->next = temp->next;
   list->length--;
   return element;
 }
