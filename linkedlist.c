@@ -212,6 +212,22 @@ List_ptr remove_all_occurrences(List_ptr list, Element element, Matcher matcher)
   return removed_elements;
 }
 
+List_ptr reverse(List_ptr list)
+{
+  List_ptr reversed_list = create_list();
+  if (list->first == NULL)
+  {
+    return reversed_list;
+  }
+  Node_ptr p_walk = list->first;
+  while(p_walk != NULL)
+  {
+    add_to_start(reversed_list, p_walk->element);
+    p_walk = p_walk->next;
+  }
+  return reversed_list;
+}
+
 Status clear_list(List_ptr list)
 {
   Node_ptr p_walk = list->first;
