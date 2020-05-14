@@ -215,10 +215,6 @@ List_ptr remove_all_occurrences(List_ptr list, Element element, Matcher matcher)
 List_ptr reverse(List_ptr list)
 {
   List_ptr reversed_list = create_list();
-  if (list->first == NULL)
-  {
-    return reversed_list;
-  }
   Node_ptr p_walk = list->first;
   while(p_walk != NULL)
   {
@@ -226,6 +222,18 @@ List_ptr reverse(List_ptr list)
     p_walk = p_walk->next;
   }
   return reversed_list;
+}
+
+List_ptr map(List_ptr list, Mapper mapper)
+{
+  List_ptr mapped_list= create_Array(list->length);
+  Node_ptr p_walk = list->first;
+  while(p_walk != NULL)
+  {
+    add_to_end(mapper(p_walk->element));
+    p_walk = p_walk->next;
+  }
+  return mapped_list;
 }
 
 Status clear_list(List_ptr list)
