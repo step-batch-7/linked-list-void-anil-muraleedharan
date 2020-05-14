@@ -246,6 +246,7 @@ List_ptr filter(List_ptr list, Predicate predigate)
     {
       add_to_list(filtered_list, p_walk->element);
     }
+    p_walk = p_walk->next;
   }
   return filtered_list;
 }
@@ -256,9 +257,21 @@ Element reduce(List_ptr list, Element init, Reducer reducer)
   while(p_walk != NULL)
   {
     init = reducer(init, p_walk->element);
+    p_walk = p_walk->next;
   }
   return init;
 }
+
+void forEach(List_ptr list, ElementProcessor processor)
+{
+  Node_ptr p_walk = list->first;
+  while(p_walk != NULL)
+  {
+    processor(p_walk->element);
+    p_walk = p_walk->next;
+  }
+}
+
 
 Status clear_list(List_ptr list)
 {
