@@ -100,3 +100,23 @@ Status add_unique(List_ptr list, Element element, Matcher matcher)
   }
   return add_to_list(list, element);
 }
+
+Element remove_from_start(List_ptr list)
+{
+  if (list->length == 0) 
+  {
+    return NULL;
+  }
+  if (list->length == 1) 
+  {
+    Element element = list->first->element;
+    list->first = NULL;
+    list->last = NULL;
+    list->length = 0;
+    return element;
+  }
+  Node *first_node = list->first;
+  list->first = first_node->next;
+  list->length--;
+  return first_node->element;
+}
