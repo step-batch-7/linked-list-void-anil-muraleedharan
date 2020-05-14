@@ -64,7 +64,7 @@ Status insert_at(List_ptr list, Element element, int position)
   }
   if(position == 0 || position == list->length)
   {
-    return position == 0 ? add_to_start(list, element) : add_to_end(list, element);
+    return position == 0 ? add_to_start(list, element) : add_to_list(list, element);
   }
   int pos = 0;
   Node_pair_ptr node_pair = malloc(sizeof(Node_pair));
