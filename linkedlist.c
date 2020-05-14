@@ -120,3 +120,29 @@ Element remove_from_start(List_ptr list)
   list->length--;
   return first_node->element;
 }
+
+Element remove_from_end(List_ptr list)
+{
+  if(list->length == 0)
+  {
+    return NULL;
+  }
+  if(list->length == 1)
+  {
+    return remove_from_start(list);
+  }
+  Node_pair_ptr node_pair = malloc(sizeof(Node_pair));
+  node_pair->current= list->first;
+  Node_ptr p_walk = list->first;
+  while (p_walk != NULL)
+  {
+    node_pair->prev = node_pair->current;
+    node_pair->current = node_pair->current->next;
+  }
+  node_pair->prev->next = NULL;
+  list->last = node_pair->prev;
+  Element element = node_pair->current->element;
+  free(node_pair);
+  list->length--;
+  return element;
+}
