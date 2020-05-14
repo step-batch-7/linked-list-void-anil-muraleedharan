@@ -175,3 +175,19 @@ Status remove_at(List_ptr list, int position)
   list->length--;
   return element;
 }
+
+Status remove_first_occurrence(List_ptr list, Element element)
+{
+  Node_ptr p_walk = list->first;
+  int position = 0;
+  while (p_walk != NULL)
+  {
+    if (p_walk->element == element)
+    {
+      return remove_at(list, position);
+    }
+    p_walk = p_walk->next;
+    position++;
+  }
+  return Failure;
+}
