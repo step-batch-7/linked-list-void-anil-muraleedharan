@@ -11,7 +11,7 @@ Node_ptr create_node(Element element)
 List_ptr create_list()
 {
   List_ptr list = malloc(sizeof(LinkedList));
-  list->last = NULL;
+  list->first = NULL;
   list->last = NULL;
   list->length = 0;
   return list;
