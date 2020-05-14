@@ -86,3 +86,17 @@ Status insert_at(List_ptr list, Element element, int position)
   list->length++;
   return Success;
 }
+
+Status add_unique(List_ptr list, Element element, Matcher matcher)
+{
+  Node_ptr p_walk = list->first;
+  while (p_walk != NULL)
+  {
+    if(matcher(p_walk->element, element))
+    {
+      return Failure;
+    }
+    p_walk = p_walk->next;
+  }
+  return add_to_list(list, element);
+}
