@@ -8,7 +8,7 @@ Node_ptr create_node(Element element)
   return new_node;
 }
 
-List_ptr create_list(void)
+List_ptr create_list()
 {
   List_ptr list = malloc(sizeof(LinkedList));
   list->last = NULL;
@@ -234,6 +234,20 @@ List_ptr map(List_ptr list, Mapper mapper)
     p_walk = p_walk->next;
   }
   return mapped_list;
+}
+
+List_ptr filter(List_ptr list, Predicate predigate)
+{
+  List_ptr filtered_list= create_list();
+  Node_ptr p_walk = list->first;
+  while(p_walk != NULL)
+  {
+    if (predigate(p_walk->element))
+    {
+      add_to_list(filtered_list, p_walk->element);
+    }
+  }
+  return filtered_list;
 }
 
 Status clear_list(List_ptr list)
