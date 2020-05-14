@@ -152,9 +152,9 @@ Status is_position_invalid_to_remove(int position, int list_length)
   return list_length == 0 || position > list_length - 1;
 }
 
-Status remove_at(List_ptr list, int position)
+Element remove_at(List_ptr list, int position)
 {
-  if(is_position_invalid_to_remove(position,list->last) || position < 0)
+  if(is_position_invalid_to_remove(position,list->length) || position < 0)
   {
     return NULL;
   }
@@ -176,18 +176,4 @@ Status remove_at(List_ptr list, int position)
   return element;
 }
 
-Status remove_first_occurrence(List_ptr list, Element element)
-{
-  Node_ptr p_walk = list->first;
-  int position = 0;
-  while (p_walk != NULL)
-  {
-    if (p_walk->element == element)
-    {
-      return remove_at(list, position);
-    }
-    p_walk = p_walk->next;
-    position++;
-  }
-  return Failure;
-}
+
