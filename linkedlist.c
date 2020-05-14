@@ -54,3 +54,30 @@ Status add_to_start(List_ptr list, Element element)
   list->length++;
   return Success;
 }
+
+Status insert_at(List_ptr list, Element element, int position)
+{
+  Node_ptr new_node = create_node(element);
+  if(position > list->length || position < 0 || new_node == NULL)
+  {
+    return Failure;
+  }
+  if(position == 0 || position == list->length)
+  {
+    return position == 0 ? add_to_start(list, element) : add_to_end(list, element);
+  }
+  int pos = 0;
+  Node_pair_ptr node_pair = malloc(sizeof(Node_pair));
+  node_pair->current = list->first;
+  node_pair->prev = list->first;
+  while (pos < position)
+  {
+    node_pair->prev = node_pair->current;
+    node_pair->current = node_pair->current->next;
+    pos++;
+  }
+  new_node->next = node_pair->prev->next;
+  node_pair->prev->next = new_node;
+  list->length++;
+  return Success;
+}
