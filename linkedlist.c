@@ -134,7 +134,7 @@ Element remove_from_end(List_ptr list)
   Node_pair_ptr node_pair = malloc(sizeof(Node_pair));
   node_pair->current= list->first;
   Node_ptr p_walk = list->first;
-  while (p_walk != NULL)
+  while (p_walk->next != NULL)
   {
     node_pair->prev = node_pair->current;
     node_pair->current = node_pair->current->next;
